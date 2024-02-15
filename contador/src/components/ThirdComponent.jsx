@@ -3,10 +3,10 @@ const verga = () => {
     return 'y te vale verga 3'
 }
 
-export const ThirdComponent = () => {
+export const ThirdComponent = ({third}) => {
  return (
         <>
-            <p className="verdin">Este es el tercer componente</p>
+            <p className="verdin">{third}</p>
             <p>{ verga()}</p>
         </>
  )
