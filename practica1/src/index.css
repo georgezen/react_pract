@@ -1,0 +1,19 @@
+.letras{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.boton{
+    background-color: #1240a9;
+    border: none;
+    color: white;
+    padding: 1%;
+    text-align: center;
+    border-radius: 8px;
+    font-size: 1.5em;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.boton:hover{
+    background-color: #0d2f7a;
+}
