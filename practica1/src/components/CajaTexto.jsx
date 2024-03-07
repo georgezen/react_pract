@@ -3,14 +3,19 @@ import { useState } from 'react';
 
 const CajaTexto = ({onAddValor}) => {
 
-    const [inputNombre, setInputNombre] = useState('');
+    const [formValues, setFormValues] = useState({
+        nombre: '',
+        apellidos:''
+    });
 
     const changeValue = (e) => {
-        console.log(inputNombre);
-        setInputNombre(e.target.value);
-        if (inputNombre.length === 10) {
-            setInputNombre('');
-        }
+        const { name,value } = e.target;
+        console.log(value);
+
+        setFormValues({
+            ...formValues,
+            [name]: value
+        });
     }
 
     const submitValue = (e) => {
@@ -26,9 +31,13 @@ const CajaTexto = ({onAddValor}) => {
     }
 
     const addValueEnter = () => {
-        if (inputNombre.trim().length <= 1) return;
-        onAddValor(inputNombre.trim());
-        setInputNombre('');
+        const { nombre, apellidos } = formValues;
+        if (nombre.trim().length <= 1 || apellidos.trim().length <= 1) return;
+        onAddValor(formValues);
+        setFormValues({
+            nombre: '',
+            apellidos:''
+        });
       }
 
 
@@ -36,9 +45,11 @@ const CajaTexto = ({onAddValor}) => {
     <>
       <form  onSubmit={ submitValue}>
             <label htmlFor="">Nombre</label>
-            <input type="text" name="nombre" id="nombre" value={inputNombre} onChange={ changeValue }/>
-        </form>
+            <input type="text" name="nombre" id="nombre" value={formValues.nombre} onChange={ changeValue }/>
+            <label htmlFor="">Apellidos</label>
+            <input type="text" name="apellidos" id="apellidos" value={formValues.apellidos} onChange={ changeValue }/>
             <input type="submit" onClick={ clickValue }  value="Enviar" />
+        </form>
     </>
   )
 }
