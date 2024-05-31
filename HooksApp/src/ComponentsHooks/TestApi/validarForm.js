@@ -1,4 +1,4 @@
-const validacion = (contacto,contactos) => {
+export const validacion = (contacto,contactos) => {
     const {nombre,telefono,correo} = contacto;
     let bandera = false;
 
@@ -15,4 +15,17 @@ const validacion = (contacto,contactos) => {
     return bandera;
 }
 
-export default validacion;
+export const sendData = (contacto) => {
+    console.log(contacto);
+    const url = import.meta.env.VITE_APP_API_URL+'contactos';
+    const token = import.meta.env.VITE_TOKEN_KEY;
+    
+    return fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify(contacto),
+    });
+}

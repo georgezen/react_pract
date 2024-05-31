@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Formulario from "./Formulario";
-import validacion  from "./validarForm";
+import {validacion,sendData}  from "./validarForm";
 
 /**
  * Hook personalizado para agregar contactos
@@ -16,6 +16,8 @@ const TestApiCustomHook = () => {
     const estado = validacion(contacto,contactos);
 
     if(estado) return;
+
+    saveContact(contacto);   
     
     // Si la validación es exitosa, agregamos el nuevo contacto al estado
     setContactos([
@@ -23,6 +25,17 @@ const TestApiCustomHook = () => {
         contacto
     ]);
   }
+
+  const saveContact = async (contacto) => {
+    // Aquí iría el código para guardar el contacto en la API
+     const estado = sendData(contacto);
+    // if(!estado) return;
+    
+    estado.then(res => res.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
+    
+}
 
   return (
     <>
