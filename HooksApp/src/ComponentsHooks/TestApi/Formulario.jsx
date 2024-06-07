@@ -1,31 +1,31 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
-const Formulario = ({onAddContacto}) => {
 
-    // Inicializamos el estado del formulario con un objeto vacío
+const Formulario = ({onAddContacto,onContacto}) => {
+
     const [form, setForm] = useState({
+        id_contacto: null,
         nombre: '',
         telefono: '',
         correo: ''
     });
 
-    // Esta función se llama cada vez que cambia el valor de un campo del formulario
+    useEffect(() => {
+        if (onContacto) {
+            setForm(onContacto);
+        }
+    }, [onContacto]);
+
     const handleChange = ({target}) => {
-        // Actualizamos el estado del formulario con el nuevo valor del campo
         setForm({
             ...form,
             [target.name]: target.value
         });
     }
 
-    // Esta función se llama cuando se envía el formulario
     const handleSubmit = (event) => {
         event.preventDefault();
-        
-        // Llamamos a la función onAddContacto con el estado del formulario como argumento
         onAddContacto(form);
-        
-        // Restablecemos el estado del formulario a su estado inicial
         setForm({
             nombre: '',
             telefono: '',
@@ -34,19 +34,16 @@ const Formulario = ({onAddContacto}) => {
     }
 
   return (
-    <>
-        <form onSubmit={ handleSubmit }>
-            {/* Cada campo del formulario tiene un manejador de eventos onChange que llama a la función handleChange cuando cambia su valor */}
-            <input type="text" name="nombre" id="nombre" placeholder='nombre' onChange={handleChange} value={form.nombre}/>    
-
-            <input type="number" name="telefono" id="telefono" placeholder='telefono' onChange={handleChange} value={form.telefono}/>    
-
-            <input type="email" name="correo" id="correo" placeholder='correo' onChange={handleChange} value={form.correo}/>    
-            
-            <input type="submit" value="Submit" />
+      <div className="form-container">
+        
+        <form onSubmit={ handleSubmit } className="contact-form">
+            <fieldset className="campo_contacto">Contacto</fieldset>
+            <input type="text" name="nombre" id="nombre" placeholder='Nombre' onChange={handleChange} value={form.nombre} className="form-input"/>    
+            <input type="number" name="telefono" id="telefono" placeholder='Teléfono' onChange={handleChange} value={form.telefono} className="form-input"/>    
+            <input type="email" name="correo" id="correo" placeholder='Correo' onChange={handleChange} value={form.correo} className="form-input"/>    
+            <input type="submit" value="Submit" className="form-submit"/>
         </form> 
-            
-    </>
+    </div>
   )
 }
 
