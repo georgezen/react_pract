@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Formulario from "./Formulario";
-import { validacion, sendData, sendUpdateData, getData,deleteData } from "./validarForm";
-import './Formulario.css'; // Importa el archivo CSS
+import './Formulario.css';
 import {ContactTable} from './ContactTable';
 import {useContacts} from './useContacts';
 
@@ -9,28 +8,43 @@ import {useContacts} from './useContacts';
 const TestApiCustomHook = () => {
   const itemsPerPage = 7; // Define cuántos contactos quieres mostrar por página
   const {
-    contactos,
     contactoSeleccionado,
-    currentItems,
     addContacto,
     deleteContact,
     seleccionarContacto,
     handleClick,
-    currentPage
+    currentPage,
+    filteredContacts,
+    filter,
+    setFilter,
+    currentItems
   } = useContacts(itemsPerPage);
 
+  
   
   return (
     <>
       <Formulario onAddContacto={addContacto} onContacto={contactoSeleccionado} />
+      <div className="row">
+        <div className="col-md-4"></div>
+        <div className="col-md-4 mt-3 mb-4">
+      <input 
+        type="text" 
+        placeholder="Filtrar por nombre o correo..." 
+        value={filter} 
+        className='form-control'
+        onChange={e => setFilter(e.target.value)} 
+      />
 
+        </div>
+      </div>
       
         <ContactTable 
         currentItems={currentItems}
         seleccionarContacto={seleccionarContacto}
         deleteContact={deleteContact}
         itemsPerPage={itemsPerPage}
-        totalItems={contactos.length}
+        totalItems={filteredContacts.length}
         currentPage={currentPage}
         handleClick={handleClick}
       />

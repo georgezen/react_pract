@@ -41,7 +41,7 @@ const Formulario = ({onAddContacto,onContacto}) => {
             <input type="text" name="nombre" id="nombre" placeholder='Nombre' onChange={handleChange} value={form.nombre} className="form-input"/>    
             <input type="number" name="telefono" id="telefono" placeholder='Teléfono' onChange={handleChange} value={form.telefono} className="form-input"/>    
             <input type="email" name="correo" id="correo" placeholder='Correo' onChange={handleChange} value={form.correo} className="form-input"/>    
-            <input type="submit" value="Submit" className="form-submit"/>
+            <input type="submit" value="Guardar" className="form-submit"/>
         </form> 
     </div>
   )

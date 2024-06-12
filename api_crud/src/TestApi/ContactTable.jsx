@@ -6,9 +6,10 @@ export const ContactTable = ({ currentItems, seleccionarContacto, deleteContact,
     <div className="row">
       <div className="col-md-2"></div>
       <div className="col-md-8">
+        <h3>Listado contactos</h3>
         <table className="table table-hover table-bordered">
           <thead>
-            <tr>
+            <tr> 
               <th>Id</th>
               <th>Nombre</th>
               <th>Telefono</th>
