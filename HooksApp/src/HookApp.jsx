@@ -1,20 +1,23 @@
-import UseStateComp from './ComponentsHooks/UseStateComp';
-import CounterWithCustomHook from './ComponentsHooks/CounterWithCustomHook';
-import UseEffectWithCustomHook from './ComponentsHooks/CustomHookUseEfect/UseEffectWithCustomHook';
-
+import Counter from './ComponentsHooks/UseCounterEffect/Counter';
+import UseCounter from './ComponentsHooks/UseCounterCustom/UseCounter';
+import FormSimple from './ComponentsHooks/UseForm/FormSimple';
+import Calculator from './ComponentsHooks/UseCalculator/Calculator';
+import FecthCustom from './ComponentsHooks/UseFetch/FecthCustom';
 
 const HookApp = () => {
   return (
     <>
       <h1>HooksApp</h1>
-      <UseStateComp />
+      {/* <Counter /> */}
       <hr />
-      {/* <h2>Counter con un custom hook</h2>
-      <CounterWithCustomHook/> */}
-
-
-      <h2>custom hook con useEfect</h2>
-      <UseEffectWithCustomHook/>
+      <UseCounter />
+      <hr />
+      <FormSimple />
+      <hr />
+      <Calculator />
+      <hr />
+      <FecthCustom />
+      
     </>
   )
 }
