@@ -3,7 +3,7 @@ import UseCounter from './ComponentsHooks/UseCounterCustom/UseCounter';
 import FormSimple from './ComponentsHooks/UseForm/FormSimple';
 import Calculator from './ComponentsHooks/UseCalculator/Calculator';
 import FecthCustom from './ComponentsHooks/UseFetch/FecthCustom';
-
+import GetById from './ComponentsHooks/UseFetch2/GetById';
 const HookApp = () => {
   return (
     <>
@@ -17,6 +17,8 @@ const HookApp = () => {
       <Calculator />
       <hr />
       <FecthCustom />
+      <hr />
+      <GetById />
       
     </>
   )
