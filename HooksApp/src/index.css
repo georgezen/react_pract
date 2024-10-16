@@ -6,5 +6,9 @@ body{
 }
 
 button{
-    margin-left: 1%;
+    margin: 1% 1% 2% 1%;
+}
+
+.contein{
+    height: 140px;
 }

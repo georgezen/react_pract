@@ -1,25 +1,47 @@
 import useFetch from './useFetch';
-import { useState } from 'react';
+import useCounter from "../UseCounterCustom/useCounter";
+import CardPokemon from './CardPokemon';
+
 
 const FecthCustom = () => {
+  const { counter, aumento, decremento, reset } = useCounter(1);
+  const { data, isLoading, hasError } = useFetch(counter);
 
-  const [pokemonId, setPokemonId] = useState('');
-  const { data,isLoading,hasError } = useFetch(pokemonId);
 
-  const handleInputChange = (e) => {
-    setPokemonId(e.target.value);
-    console.log(e.target.value);
-};
 
   return (
     <>
-        <h1>Fetch Custom</h1>
-        
-            <input type="text" name="idPokemon" id="idPokemon" placeholder="idPokemon" className='form-control' autoComplete="off" value={pokemonId} onChange={handleInputChange}/>
-        
+      <h1>Fetch Custom</h1>
 
-        <h1>{isLoading && 'Cargando...'}</h1>
-        <h1>{data?.name}</h1> 
+      <div className="contein">
+        <h1>{isLoading ? 'Cargando...' :
+          <CardPokemon
+            nombrePoke={data?.name}
+            idPoke={data?.id}
+          />
+        }</h1>
+
+      </div>
+
+      <button type="button"
+        className="btn btn-primary"
+        onClick={() => decremento()}
+      >
+        Anterior
+      </button>
+
+      <button type="button"
+        className="btn btn-success"
+        onClick={() => aumento()}
+      >
+        Siguiente
+      </button>
+      <button type="button"
+        className="btn btn-danger"
+        onClick={() => reset()}
+      >
+        Resetear
+      </button>
     </>
   )
 }

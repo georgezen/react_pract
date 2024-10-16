@@ -1,44 +1,29 @@
 import { useEffect, useState } from 'react';
 
-const useFetch = (contactoId = 116) => {
-    
+const useFetch = (contactoId) => {
+
     const [contactoData, setContactoData] = useState({
         nombre: '',
         telefono: '',
         correo: ''
     });
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJKdWFuIiwiaWF0IjoxNzIxODkzMDQwLCJleHAiOjE3MjE4OTY2NDB9.v7rglYnaz4ibCqUMXGFdMgWS6LpQnEsY7_oICUY22_8';
-    
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJKdWFuIiwiaWF0IjoxNzIyMDM4ODMzLCJleHAiOjE3MjIwNDI0MzN9.Zmvdl0eiJdxnrLSAbuBSOf9-1cQlfrXRB1SP1rw7O9o';
 
     useEffect(() => {
         if (!contactoId) return;
         getContacto(contactoId);
-    },[contactoId]);
-    
-
-
+    }, [contactoId]);
 
     const getContacto = async (id) => {
         if (id) {
             const data = await fetchContacto(id, token);
-            console.log(data);
 
             if (data) {
                 setContactoData(data);
             }
-            
-            /*const {nombre, telefono, correo} = data;
-            setContactoData({
-                nombre,
-                telefono,
-                correo
-            });*/
+
         } else {
-            setContactoData({
-                nombre:'',
-                telefono:'',
-                correo:''
-            });
+            initContacto();
         }
     }
 
@@ -71,12 +56,9 @@ const useFetch = (contactoId = 116) => {
         });
     }
 
-
-
-  return {
-    contactoData
-
-  }
+    return {
+        contactoData
+    }
 }
 
 export default useFetch

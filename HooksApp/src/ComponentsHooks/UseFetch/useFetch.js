@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
+const cache = {};
+
 
 const useFetch = (pokemon = 1) => {
+    const url = `https://pokeapi.co/api/v2/pokemon/${pokemon}`;
 
     const [estado, setEstado] = useState({
         data: null,
@@ -15,10 +18,22 @@ const useFetch = (pokemon = 1) => {
     }, [pokemon]);
 
     const fetchData = async () => {
-        initialState();
-        const res = await fetch('https://pokeapi.co/api/v2/pokemon/' + pokemon);
+        if (cache[url]) {
+            setEstado({
+                data: cache[url],
+                isLoading: false,
+                hasError: false,
+                error: null
+            });
+            return;
+        }
 
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        initialState();
+        
+        const res = await fetch(url);
+
+        await new Promise(resolve => setTimeout(resolve, 500));
         if (!res.ok) {
             setEstado({
                 data: null,
@@ -41,6 +56,9 @@ const useFetch = (pokemon = 1) => {
             hasError: false,
             error: null
         });
+
+        cache[url] = data;
+    
     }
 
 
@@ -52,6 +70,8 @@ const useFetch = (pokemon = 1) => {
             error: null
         })
     }
+
+    
 
     return {
         data: estado.data,

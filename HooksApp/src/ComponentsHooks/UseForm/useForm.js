@@ -5,6 +5,7 @@ const useForm = (structureForm) => {
 
     const handleInputChange = ({target}) => {
         const {name, value} = target;
+        
         setEstadoForm({
             ...estadoForm,
             [name]: value

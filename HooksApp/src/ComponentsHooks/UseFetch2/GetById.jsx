@@ -2,7 +2,7 @@ import {useState } from 'react';
 import useFetch from './useFetch';
 
 const GetById = () => {
-    const [contactoId, setContacto] = useState('');
+    const [contactoId, setContacto] = useState('116');
     const { contactoData } = useFetch(contactoId); 
     
     console.log(contactoData);
