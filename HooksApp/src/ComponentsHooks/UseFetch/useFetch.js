@@ -48,8 +48,6 @@ const useFetch = (pokemon = 1) => {
         }
         const data = await res.json();
 
-        console.log(data);
-
         setEstado({
             data,
             isLoading: false,

@@ -6,6 +6,9 @@ import FecthCustom from './ComponentsHooks/UseFetch/FecthCustom';
 import GetById from './ComponentsHooks/UseFetch2/GetById';
 import UseRef from './ComponentsHooks/UseRefFirst/UseRef';
 import Memorando from './ComponentsHooks/UseMemo/Memorando';
+import './ComponentsHooks/UseReducer/userReducer';
+import Reducer from './ComponentsHooks/UseReducer/Reducer';
+
 const HookApp = () => {
   return (
     <>
@@ -19,10 +22,12 @@ const HookApp = () => {
       <Calculator /> */}
       <hr />
       <FecthCustom />
+      {/* <hr />
+      <UseRef /> */}
       <hr />
-      <UseRef />
-      <hr />
-      <Memorando />
+      <Reducer />
+      
+      
       
       
     </>
