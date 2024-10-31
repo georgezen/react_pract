@@ -1,14 +1,18 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 
-const FormAddTask = ({onAddTask}) => {
+const generarIdUnico = () => {
+    return '_' + Math.random().toString(36).substr(2, 9);
+};
+
+const FormAddTask = ({ onAddTask}) => {
     const [form, setForm] = useState({
-            id: 3,
-            task: '',
-            done: false
-        
+        id: generarIdUnico(),
+        task: '',
+        done: false
+
     });
 
-    const handleChange = ({target}) => {
+    const handleChange = ({ target }) => {
         setForm({
             ...form,
             task: target.value
@@ -22,6 +26,11 @@ const FormAddTask = ({onAddTask}) => {
 
         onAddTask(form);
         console.log(form);
+        setForm({
+            id: generarIdUnico(),
+            task: '',
+            done: false
+        });
     }
 
     return (

@@ -1,22 +1,56 @@
-import { useReducer,useState } from 'react';
+import { useReducer,useEffect } from 'react';
 import {todoReducer,initialState} from './todoReducer';
 import Listtask from './components/Listtask';
 import FormAddTask from './components/FormAddTask';
 
-
-
+const init = () => {
+    return JSON.parse(localStorage.getItem('tasks')) || [];
+}
 
 const Reducer = () => {
 
-    //const [state, disparador] = useReducer(todoReducer, initialState);
-    const [tareas, setTask] = useState(initialState);
+    const [listaTasks, disparador] = useReducer(todoReducer, initialState,init);
+
+    /**Se dispara el useEffect para guardar en localstorage */
+    useEffect(() => {
+        localStorage.setItem('tasks', JSON.stringify(listaTasks));
+    }, [listaTasks]);
 
     const addTask = (task) => {
         console.log(task);
+        const action = {
+            type: 'add',
+            payload: task
+        }
+
+        const existeTarea = listaTasks.some(t => t.task === task.task);
+        if (existeTarea) return;
     
-        //if (categorias.includes(categoria)) return;
+        
+        disparador(action);
+      }
+
+      const removeTask = (id) => {
+        console.log(id);
+        
+        const action = {
+            type: 'remove',
+            payload: id
+        }
     
-        setTask([...tareas, task]);
+        disparador(action);
+      }
+
+      const toogleComplete = (id) => {
+        console.log(id);
+        console.log('hola putos');
+        
+        const action = {
+            type: 'toogleTask',
+            payload: id
+        }
+    
+        disparador(action);
       }
 
 
@@ -27,11 +61,15 @@ const Reducer = () => {
 
             <div className="container-fluid">
                 <div className="row">
-                    <div className="col-7">
-                        <Listtask listaTodos={tareas}/>
+                    <div className="col-7 mb-4">
+                        <Listtask listaTodos={listaTasks} onRemoveTask={removeTask}
+                        onMarkComplete={toogleComplete}
+                        />
                     </div>
                     <div className="col-5 mt-1">
-                        <FormAddTask onAddTask={(e) => addTask(e)}/>
+                        <FormAddTask onAddTask={(e) => addTask(e)}
+                            
+                            />
                     </div>
                 </div>
 

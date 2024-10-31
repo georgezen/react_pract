@@ -1,12 +1,14 @@
 import Itemtask from './Itemtask';
 
-const Listtask = ({listaTodos}) => {
+const Listtask = ({listaTodos,onRemoveTask,onMarkComplete}) => {
     return (
         <>
             <ul className="list-group">
                 {
-                    listaTodos.map(({id,task}, index) => (
-                        <Itemtask key={id} desc={task} indice={index}/>
+                    listaTodos.map((listaTodos, index) => (
+                        <Itemtask key={listaTodos.id} desc={listaTodos.task} indice={index} done={listaTodos.done} onRemoveTask={onRemoveTask} indicetodo={listaTodos.id}
+                        onMarkComplete={onMarkComplete}
+                        />
                     ))
                 }
             </ul>
