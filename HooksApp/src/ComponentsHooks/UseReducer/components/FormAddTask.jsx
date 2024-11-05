@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const generarIdUnico = () => {
     return '_' + Math.random().toString(36).substr(2, 9);
@@ -35,7 +35,7 @@ const FormAddTask = ({ onAddTask}) => {
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} autoComplete="off">
                 <label htmlFor="" className='mt-1 mb-1'>Agregar tarea</label>
                 <input type="text" name="addTask" className='form-control mt-1 mb-1' id="addTask" value={form.task} onChange={handleChange} />
                 <button type="submit" className='btn btn-primary mt-2'>Agregar</button>

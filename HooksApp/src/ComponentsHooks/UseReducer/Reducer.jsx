@@ -1,62 +1,17 @@
-import { useReducer,useEffect } from 'react';
-import {todoReducer,initialState} from './todoReducer';
 import Listtask from './components/Listtask';
 import FormAddTask from './components/FormAddTask';
+import useTodoTask from './components/useTodoTask';
 
-const init = () => {
-    return JSON.parse(localStorage.getItem('tasks')) || [];
-}
 
 const Reducer = () => {
 
-    const [listaTasks, disparador] = useReducer(todoReducer, initialState,init);
-
-    /**Se dispara el useEffect para guardar en localstorage */
-    useEffect(() => {
-        localStorage.setItem('tasks', JSON.stringify(listaTasks));
-    }, [listaTasks]);
-
-    const addTask = (task) => {
-        console.log(task);
-        const action = {
-            type: 'add',
-            payload: task
-        }
-
-        const existeTarea = listaTasks.some(t => t.task === task.task);
-        if (existeTarea) return;
-    
-        
-        disparador(action);
-      }
-
-      const removeTask = (id) => {
-        console.log(id);
-        
-        const action = {
-            type: 'remove',
-            payload: id
-        }
-    
-        disparador(action);
-      }
-
-      const toogleComplete = (id) => {
-        console.log(id);
-        console.log('hola putos');
-        
-        const action = {
-            type: 'toogleTask',
-            payload: id
-        }
-    
-        disparador(action);
-      }
+    const { listaTasks, addTask, removeTask, toogleComplete,counterTask,complete } = useTodoTask();
 
 
     return (
         <>
-            <h1>Reducer</h1>
+            <h1>Lista de Tareas</h1>
+            <span>Tareas pendientes: {counterTask} Tareas completadas {complete}</span>
             <hr />
 
             <div className="container-fluid">
@@ -68,7 +23,6 @@ const Reducer = () => {
                     </div>
                     <div className="col-5 mt-1">
                         <FormAddTask onAddTask={(e) => addTask(e)}
-                            
                             />
                     </div>
                 </div>
