@@ -8,6 +8,7 @@ import UseRef from './ComponentsHooks/UseRefFirst/UseRef';
 import Memorando from './ComponentsHooks/UseMemo/Memorando';
 import './ComponentsHooks/UseReducer/userReducer';
 import Reducer from './ComponentsHooks/UseReducer/Reducer';
+import ListaReducer from './ComponentsHooks/UseReducer2/ListaReducer';
 
 const HookApp = () => {
   return (
@@ -21,7 +22,7 @@ const HookApp = () => {
       <hr />
       <Calculator /> */}
       <hr />
-      <FecthCustom />
+      <ListaReducer />
       {/* <hr />
       <UseRef /> */}
       <hr />
