@@ -12,3 +12,9 @@ button{
 .contein{
     height: 140px;
 }
+
+a{
+    text-decoration: none;
+    color: white;
+ margin: 5px;
+}
