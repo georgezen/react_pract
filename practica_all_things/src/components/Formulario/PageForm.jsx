@@ -1,10 +1,9 @@
 
 import { useState } from 'react';
 import FormPerson from './FormPerson';
+import TrPerson from './TrPerson';
 
-const list = [
-   
-]
+const list = [];
 
 const PageForm = () => {
 
@@ -13,7 +12,9 @@ const PageForm = () => {
 
     const addPerson = (person) => {
         console.log(person);
-
+        let esta = listPerson.some((item) => item.nombre === person.nombre);
+        if (esta) return;
+        
         setListPerson([...listPerson, person]);
     }
 
@@ -44,16 +45,7 @@ const PageForm = () => {
                                     {
                                         listPerson.map((person) => {
                                             return (
-                                                <tr key={person.id}>
-                                                    <td>{person.id}</td>
-                                                    <td>{person.nombre}</td>
-                                                    <td>{person.age}</td>
-                                                    <td>
-                                                        <button className="btn btn-danger"
-                                                        onClick={() => deletePerson(person.id)}
-                                                        >Eliminar</button>
-                                                    </td>
-                                                </tr>
+                                                <TrPerson person={person} onDeletePerson={deletePerson}/>
                                             )
                                         })
                                     }

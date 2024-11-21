@@ -35,7 +35,7 @@ const FormPerson = ({onAddPerson}) => {
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} autoComplete="off">
                 <fieldset>
                     <legend>Registro de personas</legend>
                 </fieldset>
