@@ -24,6 +24,12 @@ const Navbar = () => {
                                 Formulario
                             </NavLink>
 
+                            <NavLink
+                                className='nav-link'
+                                to="/formReduce">
+                                Form Reduce
+                            </NavLink>
+
                         </ul>
                     </div>
                 </div>
