@@ -30,6 +30,12 @@ const Navbar = () => {
                                 Form Reduce
                             </NavLink>
 
+                            <NavLink
+                                className='nav-link'
+                                to="/conversor">
+                                Conversor
+                            </NavLink>
+
                         </ul>
                     </div>
                 </div>
