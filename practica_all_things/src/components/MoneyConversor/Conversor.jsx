@@ -13,7 +13,7 @@ const Conversor = () => {
       <div className="container-fluid">
         <div className="row mt-2">
           <div className="col-8">
-            <h1>Valor del dolar</h1>
+            <h1>Valor del euro</h1>
             {isLoading && (<h2>Cargando...</h2>)}
             {!isLoading && <div className="fondo">
             
