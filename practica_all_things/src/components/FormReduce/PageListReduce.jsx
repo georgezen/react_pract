@@ -22,7 +22,7 @@ const iniciando = () => {
     return JSON.parse(localStorage.getItem('listado')) || [];
 }
 
-const ListReduce = () => {
+const PageListReduce = () => {
 
     const [listPerson, dispatch] = useReducer(reducerPerson, initialState, iniciando);
     const [person, setPerson] = useState({
@@ -121,4 +121,4 @@ const ListReduce = () => {
     )
 }
 
-export default ListReduce
+export default PageListReduce

@@ -1,6 +1,6 @@
 import useCoversor from "./useCoversor";
 
-const Conversor = () => {
+const PageConversor = () => {
 
   const {dolar,isLoading,valor,handleChange, resultado,handleSubmit} = useCoversor({
     moneda:'',
@@ -13,7 +13,7 @@ const Conversor = () => {
       <div className="container-fluid">
         <div className="row mt-2">
           <div className="col-8">
-            <h1>Valor del euro</h1>
+            <h1>Valor del dolar</h1>
             {isLoading && (<h2>Cargando...</h2>)}
             {!isLoading && <div className="fondo">
             
@@ -44,4 +44,4 @@ const Conversor = () => {
   )
 }
 
-export default Conversor
+export default PageConversor
