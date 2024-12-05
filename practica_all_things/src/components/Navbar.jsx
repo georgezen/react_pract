@@ -27,7 +27,7 @@ const Navbar = () => {
                             <NavLink
                                 className='nav-link'
                                 to="/formReduce">
-                                Form Reduce
+                                Form con el Reduce
                             </NavLink>
 
                             <NavLink
