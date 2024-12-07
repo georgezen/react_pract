@@ -20,7 +20,7 @@ const PageConversor = () => {
             {!isLoading && <div className="fondo">
 
               <span className="badge badge-dark">Codigo: {dolar.moneda}</span>
-              <span className="badge badge-secondary">Nombre: {dolar.nombre}</span>
+              <span className="badge badge-secondary">Moneda: {dolar.nombre}</span>
               <span className="badge badge-secondary">Tipo cambio: {dolar.valorCambio}</span>
 
             </div>}
