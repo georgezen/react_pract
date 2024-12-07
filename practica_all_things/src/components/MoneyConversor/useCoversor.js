@@ -25,6 +25,8 @@ const useCoversor = (dataMoneda) => {
 
     const handleChange = ({ target }) => {
         const { value } = target;
+        console.log(value);
+        
         setValor(value);
     }
 
