@@ -36,6 +36,12 @@ const Navbar = () => {
                                 Conversor
                             </NavLink>
 
+                            <NavLink
+                                className='nav-link'
+                                to="/crudApi">
+                                Crud de una Api
+                            </NavLink>
+
                         </ul>
                     </div>
                 </div>
