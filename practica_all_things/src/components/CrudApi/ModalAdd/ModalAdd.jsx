@@ -1,16 +1,12 @@
-import { useState ,useEffect} from 'react';
+import { useState, useEffect } from 'react';
 
-
-const ModalAdd = ({ propDataPresentation ,onDataArticle}) => {
-
-  const [selectedOption, setSelectedOption] = useState('');
-
+const ModalAdd = ({ propDataPresentation, onDataArticle, onClose }) => {
+  const [selectedOption, setSelectedOption] = useState('0');
   const [dataArticle, setDataArticle] = useState({
     descripcion: '',
     stock: 0,
     precio_uni: 0,
     id_presentation: ''
-
   });
 
   useEffect(() => {
@@ -20,9 +16,6 @@ const ModalAdd = ({ propDataPresentation ,onDataArticle}) => {
     }));
   }, [selectedOption]);
 
-  
-  
-
   const handleArticle = ({ target }) => {
     console.log(target.name);
     setDataArticle({
@@ -31,11 +24,9 @@ const ModalAdd = ({ propDataPresentation ,onDataArticle}) => {
     });
   }
 
-
   const handleChange = ({ target }) => {
     console.log(target.value);
     setSelectedOption(target.value);
-
   }
 
   const handleSubmit = (e) => {
@@ -48,22 +39,19 @@ const ModalAdd = ({ propDataPresentation ,onDataArticle}) => {
       stock: 0,
       precio_uni: 0,
       id_presentation: ''
-  
-    })
+    });
     setSelectedOption('0');
-    
+    onClose(); 
   }
-
 
   return (
     <>
-      <div id="openModal" className="modalDialog">
+      <div className="modalDialog open">
         <div className="modal-content scrolling">
           <div className="modal-header">
             <h3 className="modal-title" id="exampleModalLongTitle">Agregar articulo</h3>
-
           </div>
-          <div className="modal-body ">
+          <div className="modal-body">
             <form onSubmit={handleSubmit}>
               <div className="form-group">
                 <label htmlFor="descripcion">Descripción</label>
@@ -79,35 +67,23 @@ const ModalAdd = ({ propDataPresentation ,onDataArticle}) => {
               </div>
               <div className="form-group">
                 <label htmlFor="id_presentation">Presentación</label>
-                <select className="form-select" id="id_presentation" name="id_presentation" defaultValue="0" value={selectedOption}
-                  onChange={handleChange}
-                >
-
+                <select className="form-select" id="id_presentation" name="id_presentation" value={selectedOption} onChange={handleChange}>
                   <option value="0">Seleccione una presentación</option>
-
                   {propDataPresentation.map(({ id_presentation, descripcion }) => (
                     <option key={id_presentation} value={id_presentation}>{descripcion}</option>
                   ))}
-
                 </select>
-
                 <button type="submit" className="btn btn-success mt-3">Guardar</button>
               </div>
             </form>
           </div>
           <div className="modal-footer mt-2">
-            
-            <a href="#close" className="btn btn-danger">Cerrar</a>
+            <button className="btn btn-danger" onClick={onClose}>Cerrar</button>
           </div>
-
-
-
-
         </div>
-
       </div>
     </>
-  )
+  );
 }
 
-export default ModalAdd
+export default ModalAdd;

@@ -1,10 +1,17 @@
+import { useState } from 'react';
 import ModalAdd from "./ModalAdd/ModalAdd";
 import useCrudApi from "./useCrudApi";
 
 const CrudApi = () => {
-  
-  const { dataPresentations,getDataPresentation,listArticles,isLoading,addArticle } = useCrudApi();
-  console.log('listArticulos',listArticles);
+  const { dataPresentations, getDataPresentation, listArticles, isLoading, addArticle,borrarArticle,handleOpenModal,handleCloseModal,isModalOpen } = useCrudApi();
+
+
+  // const editArticle = (id_article) => {
+  //   console.log('Editar', id_article);
+  // }
+
+
+
   
 
   
@@ -13,12 +20,17 @@ const CrudApi = () => {
     <>
       <div className="container-fluid">
         <div className="row">
-        <div className="col-1"></div>
+          <div className="col-1"></div>
           <div className="col-4 mt-2">
             <h2>Crud de una Api</h2>
-            <a href="#openModal" className="btn btn-primary mb-2" onClick={getDataPresentation}>Agregar</a>
-            <ModalAdd propDataPresentation={dataPresentations} onDataArticle={addArticle}/>
-            
+            <button className="btn btn-primary mb-2" onClick={handleOpenModal}>Agregar</button>
+            {isModalOpen && (
+              <ModalAdd
+                propDataPresentation={dataPresentations}
+                onDataArticle={addArticle}
+                onClose={handleCloseModal}
+              />
+            )}
           </div>
         </div>
         <div className="row">
@@ -47,8 +59,8 @@ const CrudApi = () => {
                       <td>{precio_uni}</td>
                       <td>{presentacion}</td>
                       <td>
-                        <button className="btn btn-success">Editar</button>
-                        <button className="btn btn-danger">Eliminar</button>
+                        <button className="btn btn-success" onClick={() => editArticle(id_article)}>Editar</button>
+                        <button className="btn btn-danger" onClick={() => borrarArticle(id_article)}>Eliminar</button>
                       </td>
                     </tr>
                   ))}
