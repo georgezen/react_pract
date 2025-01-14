@@ -1,14 +1,12 @@
 const getData = async () => {
     try {
         const res = await fetch('http://localhost:3000/api/articles');
-    const users = await res.json();
+        const users = await res.json();
 
-    return users.data;
-        
+        return users.data;
     } catch (error) {
-        console.error('Error al consultar los articulos:', error);
+        console.error('Error al consultar los artículos:', error);
     }
-    
 }
 
 const saveArticle = async (article) => {
@@ -23,14 +21,32 @@ const saveArticle = async (article) => {
 
         if (res.ok) {
             const newArticle = await res.json();
-            return newArticle;    
+            return newArticle;
         }
-        
     } catch (error) {
-        console.error('Error al agregar el articulo:', error);
+        console.error('Error al agregar el artículo:', error);
     }
 }
 
+const getArticleById = async (id) => {
+    try {
+        const res = await fetch(`http://localhost:3000/api/article/${id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (res.ok) {
+            const article = await res.json();
+            return article;
+        } else {
+            throw new Error('Error al obtener el artículo');
+        }
+    } catch (error) {
+        console.error('Error al obtener el artículo:', error);
+    }
+}
 
 const deleteArticle = async (id) => {
     try {
@@ -53,8 +69,10 @@ const deleteArticle = async (id) => {
 }
 
 
+
 export {
     getData,
     saveArticle,
-    deleteArticle
+    deleteArticle,
+    getArticleById
 }

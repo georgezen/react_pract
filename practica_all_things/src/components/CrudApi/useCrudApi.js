@@ -1,6 +1,6 @@
 import { useState, useEffect, useReducer } from "react";
 import { reducerPerson } from './ModalAdd/useReducerArticle';
-import { getData,saveArticle,deleteArticle } from './requests';
+import { getData,saveArticle,deleteArticle,getArticleById } from './requests';
 
 const initialState = [];
 
@@ -8,8 +8,11 @@ const useCrudApi = () => {
 
   const [listArticles, dispatch] = useReducer(reducerPerson, initialState);
   const [dataPresentations, setDataPresentations] = useState([]);
+  const [dataArticleEdit, setDataArticleEdit] = useState({});
+  const [edit, setEdit] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  
 
   const setData = () => {
     let res = getData();
@@ -53,7 +56,13 @@ const useCrudApi = () => {
 
     await timingData();
     setIsLoading(false);
-};
+}
+
+const editArticle = async (id_article) => {
+  const article = await getArticleById(id_article);
+  console.log(article);
+  setDataArticleEdit(article);
+}
 
 const borrarArticle = async (id) => {
   console.log('id', id);
@@ -62,17 +71,26 @@ const borrarArticle = async (id) => {
   const newArticle = await deleteArticle(id);
   console.log(newArticle);
 
-  await timingData();
+  setData();
   setIsLoading(false);
 }
 
-const handleOpenModal = () => {
-  getDataPresentation();
+const handleOpenModal = (id = null) => {
   setIsModalOpen(true);
+  
+  // Si existe el id de articulo a editar se consulta la info
+  if (id) {
+    editArticle(id);
+  }
+  getDataPresentation();
+  
+  
 }
 
 const handleCloseModal = () => {
   setIsModalOpen(false);
+  setDataPresentations([]);
+  setDataArticleEdit({});
 }
 
 
@@ -81,14 +99,15 @@ const handleCloseModal = () => {
 
   return {
     dataPresentations,
-    getDataPresentation,
     listArticles,
     isLoading,
     addArticle,
     borrarArticle,
     handleOpenModal,
     handleCloseModal,
-    isModalOpen
+    isModalOpen,
+    dataArticleEdit
+    
   }
 }
 

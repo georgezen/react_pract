@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 
-const ModalAdd = ({ propDataPresentation, onDataArticle, onClose }) => {
+
+
+const ModalAdd = ({ propDataPresentation, onDataArticle, onClose,dataArticleEdit,isModalOpen }) => {
   const [selectedOption, setSelectedOption] = useState('0');
   const [dataArticle, setDataArticle] = useState({
     descripcion: '',
@@ -9,12 +11,29 @@ const ModalAdd = ({ propDataPresentation, onDataArticle, onClose }) => {
     id_presentation: ''
   });
 
+  
+  useEffect(() => {
+    if (!isEmpty(dataArticleEdit)) {
+      setDataArticle({
+        descripcion: dataArticleEdit.descripcion,
+        stock: dataArticleEdit.stock,
+        precio_uni: dataArticleEdit.precio_uni,
+        id_presentation: dataArticleEdit.id_presentation
+      });
+      setSelectedOption(dataArticleEdit.id_presentation.toString());
+    }
+  }, [isModalOpen, dataArticleEdit]);
+
   useEffect(() => {
     setDataArticle(prevState => ({
       ...prevState,
       id_presentation: parseInt(selectedOption)
     }));
   }, [selectedOption]);
+
+  const isEmpty = (obj) => {
+    return Object.keys(obj).length === 0;
+  }
 
   const handleArticle = ({ target }) => {
     console.log(target.name);
@@ -33,7 +52,15 @@ const ModalAdd = ({ propDataPresentation, onDataArticle, onClose }) => {
     e.preventDefault();
     console.log(dataArticle);
     onDataArticle(dataArticle);
+    cleanForm();
+  }
 
+  const closeModal = () => {
+    cleanForm();
+  }
+
+  const cleanForm = () => {
+    onClose();
     setDataArticle({
       descripcion: '',
       stock: 0,
@@ -41,8 +68,9 @@ const ModalAdd = ({ propDataPresentation, onDataArticle, onClose }) => {
       id_presentation: ''
     });
     setSelectedOption('0');
-    onClose(); 
   }
+
+
 
   return (
     <>
@@ -78,7 +106,7 @@ const ModalAdd = ({ propDataPresentation, onDataArticle, onClose }) => {
             </form>
           </div>
           <div className="modal-footer mt-2">
-            <button className="btn btn-danger" onClick={onClose}>Cerrar</button>
+            <button className="btn btn-danger" onClick={closeModal}>Cerrar</button>
           </div>
         </div>
       </div>
