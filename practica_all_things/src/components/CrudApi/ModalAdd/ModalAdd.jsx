@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 const ModalAdd = ({ propDataPresentation, onDataArticle, onClose,dataArticleEdit,isModalOpen }) => {
   const [selectedOption, setSelectedOption] = useState('0');
   const [dataArticle, setDataArticle] = useState({
+    id_article: 0,
     descripcion: '',
     stock: 0,
     precio_uni: 0,
@@ -15,6 +16,7 @@ const ModalAdd = ({ propDataPresentation, onDataArticle, onClose,dataArticleEdit
   useEffect(() => {
     if (!isEmpty(dataArticleEdit)) {
       setDataArticle({
+        id_article: dataArticleEdit.id_article,
         descripcion: dataArticleEdit.descripcion,
         stock: dataArticleEdit.stock,
         precio_uni: dataArticleEdit.precio_uni,
@@ -62,6 +64,7 @@ const ModalAdd = ({ propDataPresentation, onDataArticle, onClose,dataArticleEdit
   const cleanForm = () => {
     onClose();
     setDataArticle({
+      id_article: 0,
       descripcion: '',
       stock: 0,
       precio_uni: 0,
@@ -81,6 +84,7 @@ const ModalAdd = ({ propDataPresentation, onDataArticle, onClose,dataArticleEdit
           </div>
           <div className="modal-body">
             <form onSubmit={handleSubmit}>
+              <input type="hidden" name="id_article" value={dataArticle.id_article}/>
               <div className="form-group">
                 <label htmlFor="descripcion">Descripción</label>
                 <input type="text" className="form-control" id="descripcion" name="descripcion" onChange={handleArticle} value={dataArticle.descripcion} />

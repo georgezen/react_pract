@@ -1,6 +1,6 @@
 import { useState, useEffect, useReducer } from "react";
 import { reducerPerson } from './ModalAdd/useReducerArticle';
-import { getData,saveArticle,deleteArticle,getArticleById } from './requests';
+import { getData,saveArticle,deleteArticle,getArticleById,updateArticle } from './requests';
 
 const initialState = [];
 
@@ -49,11 +49,17 @@ const useCrudApi = () => {
 
   const addArticle = async (article) => {
     console.log('article', article);
+
+    const {id_article} = article;
+
     setIsLoading(true);
-
-    const newArticle = await saveArticle(article);
-    console.log(newArticle);
-
+    if (id_article !== 0) {
+      const editado = await updateArticle(article);
+      console.log('editado',editado);
+    }else{
+      const add = await saveArticle(article);
+      console.log('agregado',add);
+    }
     await timingData();
     setIsLoading(false);
 }

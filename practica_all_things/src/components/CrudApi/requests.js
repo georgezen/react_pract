@@ -68,11 +68,31 @@ const deleteArticle = async (id) => {
     }
 }
 
+const updateArticle = async (article) => {
+    try {
+        const res = await fetch(`http://localhost:3000/api/article/${article.id_article}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(article)
+        });
 
+        if (res.ok) {
+            const updatedArticle = await res.json();
+            return updatedArticle;
+        } else {
+            throw new Error('Error al actualizar el artículo');
+        }
+    } catch (error) {
+        console.error('Error al actualizar el artículo:', error);
+    }
+}
 
 export {
     getData,
     saveArticle,
     deleteArticle,
-    getArticleById
+    getArticleById,
+    updateArticle
 }
