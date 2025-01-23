@@ -91,10 +91,22 @@ const updateArticle = async (article) => {
     }
 }
 
+const getPresentations = async () => {
+    try {
+        const res = await fetch(`${API_URL}/presentations`);
+        const presentations = await res.json();
+
+        return presentations;
+    } catch (error) {
+        console.error('Error al consultar las presentaciones:', error);
+    }
+}
+
 export {
     getData,
     saveArticle,
     deleteArticle,
     getArticleById,
-    updateArticle
+    updateArticle,
+    getPresentations
 }

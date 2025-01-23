@@ -1,6 +1,6 @@
 import { useState, useEffect, useReducer } from "react";
 import { reducerPerson } from './ModalAdd/useReducerArticle';
-import { getData,saveArticle,deleteArticle,getArticleById,updateArticle } from './requests';
+import { getData,saveArticle,deleteArticle,getArticleById,updateArticle,getPresentations } from './requests';
 
 const initialState = [];
 
@@ -9,7 +9,6 @@ const useCrudApi = () => {
   const [listArticles, dispatch] = useReducer(reducerPerson, initialState);
   const [dataPresentations, setDataPresentations] = useState([]);
   const [dataArticleEdit, setDataArticleEdit] = useState({});
-  const [edit, setEdit] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   
@@ -41,9 +40,8 @@ const useCrudApi = () => {
 
   const getDataPresentation = async () => {
     //Para poder pasar resultados de una consulta a otra, se debe hacer una consulta por separado y luego pasar ese resultado a otro estado para poder utilizarlo en otro componente
-
-    const res = await fetch('http://localhost:3000/api/presentations');
-    const presentaciones = await res.json();
+    
+    const presentaciones = await getPresentations();
     setDataPresentations(presentaciones);
   }
 
