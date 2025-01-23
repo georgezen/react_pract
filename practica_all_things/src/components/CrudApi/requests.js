@@ -1,6 +1,8 @@
+const API_URL = process.env.REACT_APP_API_URL;
+
 const getData = async () => {
     try {
-        const res = await fetch('http://localhost:3000/api/articles');
+        const res = await fetch(`${API_URL}/articles`);
         const users = await res.json();
 
         return users.data;
@@ -11,7 +13,7 @@ const getData = async () => {
 
 const saveArticle = async (article) => {
     try {
-        const res = await fetch('http://localhost:3000/api/articles', {
+        const res = await fetch(`${API_URL}/articles`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -30,7 +32,7 @@ const saveArticle = async (article) => {
 
 const getArticleById = async (id) => {
     try {
-        const res = await fetch(`http://localhost:3000/api/article/${id}`, {
+        const res = await fetch(`${API_URL}/article/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -50,7 +52,7 @@ const getArticleById = async (id) => {
 
 const deleteArticle = async (id) => {
     try {
-        const res = await fetch(`http://localhost:3000/api/article/${id}`, {
+        const res = await fetch(`${API_URL}/article/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -70,7 +72,7 @@ const deleteArticle = async (id) => {
 
 const updateArticle = async (article) => {
     try {
-        const res = await fetch(`http://localhost:3000/api/article/${article.id_article}`, {
+        const res = await fetch(`${API_URL}/article/${article.id_article}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
